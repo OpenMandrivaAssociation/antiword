@@ -1,6 +1,6 @@
 %define name antiword
 %define version 0.37
-%define release 1mdk
+%define release %mkrel 2
 
 Summary: MS Word to ASCII/Postscript converter
 Name: %{name}
@@ -11,6 +11,7 @@ URL: http://www.winfield.demon.nl/
 Patch0: antiword-find-my-files.patch
 License: GPL 
 Group: Text tools 
+BuildRequires: bzip2
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
@@ -25,7 +26,7 @@ perl -pi -e 's|PKGBASEDIR_SUBSTITUTE_FROM_SPECFILE|\"%{_libdir}\"|g' options.c
 chmod a+r * Resources/* Docs/*
 
 %build
-OPT="$RPM_OPT_FLAGS" make all
+%make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -34,7 +35,8 @@ install -m 755 antiword $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/%{name}
 cp -a Resources/* $RPM_BUILD_ROOT%{_libdir}/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-cp Docs/*.1 $RPM_BUILD_ROOT%{_mandir}/man1
+bzip2 Docs/*.1
+cp Docs/*.1.bz2 $RPM_BUILD_ROOT%{_mandir}/man1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
