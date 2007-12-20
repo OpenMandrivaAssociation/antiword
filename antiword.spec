@@ -12,6 +12,7 @@ Patch0: antiword-find-my-files.patch
 License: GPL 
 Group: Text tools 
 BuildRequires: bzip2
+BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
 Antiword is a free MS-Word reader for Linux, BeOS and RISC OS. It converts
