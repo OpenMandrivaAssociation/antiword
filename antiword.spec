@@ -1,6 +1,6 @@
 %define name antiword
 %define version 0.37
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary: MS Word to ASCII/Postscript converter
 Name: %{name}
