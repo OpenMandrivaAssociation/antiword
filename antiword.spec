@@ -1,6 +1,6 @@
 %define name antiword
 %define version 0.37
-%define release %mkrel 4
+%define release %mkrel 5
 
 Summary: MS Word to ASCII/Postscript converter
 Name: %{name}
@@ -9,6 +9,9 @@ Release: %{release}
 Source: %{name}-%{version}.tar.bz2
 URL: http://www.winfield.demon.nl/
 Patch0: antiword-find-my-files.patch
+# Fix buffer overflow with malformed input files (patch from Debian, Debian
+# bug #407015)
+Patch1:	10_fix_buffer_overflow_wordole_c.dpatch
 License: GPL 
 Group: Text tools 
 BuildRequires: bzip2
@@ -22,11 +25,14 @@ tries to keep the layout of the document intact.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 perl -pi -e 's|PKGBASEDIR_SUBSTITUTE_FROM_SPECFILE|\"%{_libdir}\"|g' options.c
+# Use standard CFLAGS
+sed -i -e "s/OPT\t=/#OPT\t=/" Makefile*
 chmod a+r * Resources/* Docs/*
 
 %build
-%make all
+OPT="%{optflags}" %make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
