@@ -35,17 +35,17 @@ chmod a+r * Resources/* Docs/*
 OPT="%{optflags}" %make all
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -m 755 antiword $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_libdir}/%{name}
-cp -a Resources/* $RPM_BUILD_ROOT%{_libdir}/%{name}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+rm -rf %{buildroot}
+mkdir -p %{buildroot}%{_bindir}
+install -m 755 antiword %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_libdir}/%{name}
+cp -a Resources/* %{buildroot}%{_libdir}/%{name}
+mkdir -p %{buildroot}%{_mandir}/man1
 bzip2 Docs/*.1
-cp Docs/*.1.bz2 $RPM_BUILD_ROOT%{_mandir}/man1
+cp Docs/*.1.bz2 %{buildroot}%{_mandir}/man1
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
