@@ -1,0 +1,24 @@
+--- antiword-0.37/options.c.orig	2005-05-27 20:21:18.000000000 +0200
++++ antiword-0.37/options.c	2009-04-07 08:09:20.000000000 +0200
+@@ -218,7 +218,7 @@
+ 	}
+ 
+ 	/* Try the local version of the mapping file */
+-	szHome = szGetHomeDirectory();
++	szHome = PKGBASEDIR_SUBSTITUTE_FROM_SPECFILE;
+ 	if (strlen(szHome) + tFilenameLen <
+ 	    sizeof(szMappingFile) -
+ 	    sizeof(ANTIWORD_DIR) -
+--- antiword-0.37/antiword.h.orig	2005-07-06 19:46:22.000000000 +0200
++++ antiword-0.37/antiword.h	2009-04-07 08:09:20.000000000 +0200
+@@ -224,8 +224,8 @@
+ #define ANTIWORD_DIR		".antiword"
+ #define FONTNAMES_FILE		"fontnames"
+ #else	/* All others */
+-#define GLOBAL_ANTIWORD_DIR	"/usr/share/antiword"
+-#define ANTIWORD_DIR		".antiword"
++#define GLOBAL_ANTIWORD_DIR	"/usr/lib"
++#define ANTIWORD_DIR		"antiword"
+ #define FONTNAMES_FILE		"fontnames"
+ #endif /* __dos */
+ /* The names of grouped mapping files */
