@@ -1,6 +1,6 @@
 %define name antiword
 %define version 0.37
-%define release %mkrel 8
+%define release %mkrel 9
 
 Summary: MS Word to ASCII/Postscript converter
 Name: %{name}
@@ -35,17 +35,17 @@ chmod a+r * Resources/* Docs/*
 OPT="%{optflags}" %make all
 
 %install
-rm -rf %{buildroot}
-mkdir -p %{buildroot}%{_bindir}
-install -m 755 antiword %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_libdir}/%{name}
-cp -a Resources/* %{buildroot}%{_libdir}/%{name}
-mkdir -p %{buildroot}%{_mandir}/man1
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -m 755 antiword $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/%{name}
+cp -a Resources/* $RPM_BUILD_ROOT%{_libdir}/%{name}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
 bzip2 Docs/*.1
-cp Docs/*.1.bz2 %{buildroot}%{_mandir}/man1
+cp Docs/*.1.bz2 $RPM_BUILD_ROOT%{_mandir}/man1
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
@@ -53,4 +53,63 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %{_mandir}/*/*
 %{_libdir}/%{name}
+
+
+
+%changelog
+* Mon May 02 2011 Oden Eriksson <oeriksson@mandriva.com> 0.37-8mdv2011.0
++ Revision: 662766
+- mass rebuild
+
+* Mon Nov 29 2010 Oden Eriksson <oeriksson@mandriva.com> 0.37-7mdv2011.0
++ Revision: 603179
+- rebuild
+
+* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 0.37-6mdv2010.1
++ Revision: 521984
+- rebuilt for 2010.1
+
+* Sat Jun 06 2009 Frederik Himpe <fhimpe@mandriva.org> 0.37-5mdv2010.0
++ Revision: 383304
+- Add patch from Debian fixing buffer overflow
+- Build with standard CFLAGS
+
+* Tue Apr 07 2009 Funda Wang <fwang@mandriva.org> 0.37-4mdv2009.1
++ Revision: 364680
+- rediff my file patch
+
+* Mon Jun 16 2008 Thierry Vignaud <tv@mandriva.org> 0.37-4mdv2009.0
++ Revision: 220349
+- rebuild
+
+* Fri Jan 11 2008 Thierry Vignaud <tv@mandriva.org> 0.37-3mdv2008.1
++ Revision: 148448
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Wed Apr 25 2007 Adam Williamson <awilliamson@mandriva.org> 0.37-2mdv2008.0
++ Revision: 18109
+- rebuild for the modern era, slight updates to spec to suit modern policies
+
+
+* Sun Jan 15 2006 Marcel Pol <mpol@mandriva.org> 0.37-1mdk
+- From Moreno Manzini <moreno.mg@gmail.com>
+  - 0.37
+
+* Wed May 25 2005 Lenny Cartier <lenny@mandrakesoft.com> 0.36.1-1mdk
+- 0.36.1
+
+* Wed Nov 17 2004 Lenny Cartier <lenny@mandrakesoft.com> 0.36-1mdk
+- 0.36
+- regenerate & rename patch
+
+* Tue Dec 09 2003 Lenny Cartier <lenny@mandrakesoft.com> 0.35-1mdk
+- 0.35
+
+* Fri Mar 21 2003 Lenny Cartier <lenny@mandrakesoft.com> 0.33-1mdk
+- 0.33
+- regenerate find-my-files patch
 
