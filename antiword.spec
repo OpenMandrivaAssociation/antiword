@@ -5,7 +5,7 @@ Release:	9
 License:	GPLv2
 Group:		Text tools 
 Url:		http://www.winfield.demon.nl/
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	http://www.winfield.demon.nl/linux/%{name}-%{version}.tar.gz
 Patch0:		antiword-find-my-files.patch
 # Fix buffer overflow with malformed input files (patch from Debian, Debian
 # bug #407015)
