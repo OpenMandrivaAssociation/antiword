@@ -3,7 +3,7 @@
 Summary:	MS Word to ASCII/Postscript converter
 Name:		antiword
 Version:	0.37
-Release:	18
+Release:	19
 License:	GPLv2
 Group:		Text tools 
 Url:		http://www.winfield.demon.nl/
