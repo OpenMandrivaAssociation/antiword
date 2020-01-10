@@ -21,7 +21,7 @@ tries to keep the layout of the document intact.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 sed -i -e 's|PKGBASEDIR_SUBSTITUTE_FROM_SPECFILE|\"%{_libdir}\"|g' options.c
 # Use standard CFLAGS
